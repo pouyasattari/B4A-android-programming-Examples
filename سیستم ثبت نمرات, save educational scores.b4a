@@ -1,0 +1,134 @@
+Build1=karname,karname.pouya.sattari
+File1=myDB.db
+File2=ui1.bal
+FileGroup1=Default Group
+FileGroup2=Default Group
+Group=Default Group
+Library1=core
+Library2=sql
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~
+Module1=Starter
+NumberOfFiles=2
+NumberOfLibraries=2
+NumberOfModules=1
+Version=9.801
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: سیستم درج نمرات
+	#VersionCode: 1
+	#VersionName: 1
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: true
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+     
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+	Dim nomre1 As EditText
+	Dim nomre2 As EditText
+	Dim nomre3 As EditText
+	Dim compute_avarage As Button
+	Dim avrage_value As Label
+	Dim result2 As Label
+	
+	Private mardood As Label
+	Private ghabool As Label
+	Private result As Label
+	
+	Private sabtButton As Button
+	
+	Private nameText As EditText
+	Private familyName As EditText
+	
+	Dim sql1 As SQL
+	Dim cur1 As Cursor
+	Private showLabel As Label
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("ui1")
+End Sub
+
+Sub Activity_Resume
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+End Sub
+
+
+Sub compute_avarage_Click
+	If nomre1.Text="" Then
+	Msgbox("نمره آزمون اول را درج نمایید","اخطار")
+	Else If nomre2.Text="" Then
+		Msgbox("نمره آزمون دوم را درج نمایید","اخطار")
+	else If nomre3.Text="" Then
+		Msgbox("نمره آزمون سوم را درج نمایید","اخطار")
+		
+Else If nameText.Text="" Then
+		Msgbox("نام را درج نمایید","اخطار")
+		
+Else If familyName.Text="" Then
+		Msgbox("فامیلی را درج نمایید","اخطار")
+		End If
+		
+	avrage_value.Text= (nomre1.Text + nomre2.Text + nomre3.Text)/3
+	If avrage_value.Text<10 Then
+		result2.Text=mardood.Text
+		Else If avrage_value.Text>=10 Then
+		result.Text=ghabool.Text
+	End If
+	
+	If result.Text<>""  Then
+		sabtButton.Visible = True
+	End If
+End Sub
+
+Sub clear_Click
+	nomre1.Text=""
+	nomre2.Text=""
+	nomre3.Text=""
+	result.Text=""
+	result2.Text=""
+	avrage_value.Text=""
+	ghabool.Text=""
+	mardood.Text=""
+End Sub
+
+Sub sabtButton_Click
+	If File.Exists(File.DirInternal,"myDB.db")=False Then
+		File.Copy(File.DirAssets,"myDB.db",File.DirInternal,"myDB.db")
+	End If
+	
+	If sql1.IsInitialized = False Then
+		sql1.Initialize(File.DirInternal,"myDB.db",False)
+	End If
+	
+	sql1.ExecNonQuery("insert into tbl1 (name,family,score1,score2,score3,passedORno) values  ('"&nameText.Text&"','"&familyName.Text&"','"&nomre1.Text&"','"&nomre2.Text&"','"&nomre3.Text&"','"&result.Text&"')")
+	
+				update_label
+
+End Sub
+
+
+Sub update_label
+	cur1=sql1.ExecQuery("select * from tbl1")
+	Dim s1 As String
+	For i=0 To cur1.RowCount-1
+		cur1.Position=i
+		s1=s1&CRLF&cur1.GetString("name")&"  |  "&cur1.GetString("family")&"  |  "&cur1.GetString("score1")&cur1.GetString("score2")&cur1.GetString("score3")&cur1.GetString("passedORno")
+		
+	Next
+				showLabel.Text=s1
+End Sub
