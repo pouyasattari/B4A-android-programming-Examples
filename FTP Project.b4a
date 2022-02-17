@@ -1,0 +1,84 @@
+Build1=ftp,app.ftp.pouya
+File1=download.txt
+File2=txt.txt
+File3=ui1.bal
+FileGroup1=Default Group
+FileGroup2=Default Group
+FileGroup3=Default Group
+Group=Default Group
+Library1=core
+Library2=net
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~'End of default text.~\n~
+Module1=Starter
+NumberOfFiles=3
+NumberOfLibraries=2
+NumberOfModules=1
+Version=9.801
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: FTP
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: false
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+
+	Private Text1 As EditText
+	Private Text2 As EditText
+	Private Text3 As EditText
+	Private save As Button
+	Dim str As String
+	Dim ftp1 As FTP
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("ui1")
+
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+
+Sub saveButton_Click
+	Dim st As String
+	
+					str=Text1.Text&"   "&Text2.Text&"   "&Text3.Text
+		If File.Exists(File.DirRootExternal,"txt.txt")=False Then
+			File.Copy(File.DirAssets,"txt.txt",File.DirRootExternal,"txt.txt")
+		End If
+		
+			If File.Exists(File.DirInternal,"download.txt")=False Then
+			File.Copy(File.DirAssets,"download.txt",File.DirInternal,"download.txt")
+			End If
+		
+	File.WriteString(File.DirRootExternal,"txt.txt",str)
+		ftp1.Initialize("ftp1","ftp.test.ir",21,"user","passwd")
+		ftp1.PassiveMode=True
+			ftp1.UploadFile(File.DirRootExternal,"txt.txt",False,"/myTxt.txt")
+			ftp1.DownloadFile("/myText.txt",False,File.DirInternal,"download.txt")
+
+				st=File.ReadString(File.DirInternal,"download.txt")
+				Msgbox(st,"your text is:")
+End Sub
