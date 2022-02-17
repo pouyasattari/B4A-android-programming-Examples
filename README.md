@@ -4,7 +4,8 @@ This is the android programing projects with B4A at my computer engineering prog
 
     The project's readable codes are stored in .b4a files   -   Project's packages stored in .zip files
 
-Small projects:   Calculator Project.zip <br />
+Small projects:  <br />
+                  Calculator Project.zip <br />
                   FTP Project.zip <br />
                   MenuItem+Exitapplication project.zip <br />
                   MessageBox project.zip <br />
@@ -19,5 +20,5 @@ Small projects:   Calculator Project.zip <br />
 <br /> 
 <br /> 
 
-Final project  :   سیستم ثبت نمرات.zip
+Final project  :   <br /> سیستم ثبت نمرات.zip
 <br /> <br /> 
