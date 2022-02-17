@@ -2,7 +2,7 @@
 This is the android programing projects with B4A at my computer engineering program at university
 
 
-Small projects:   Calculator Project.zip \n
+Small projects:   Calculator Project.zip
                   FTP Project.zip
                   MenuItem+Exitapplication project.zip
                   MessageBox project.zip
