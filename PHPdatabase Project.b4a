@@ -1,0 +1,70 @@
+Build1=phptest,test.php.app
+File1=ui1.bal
+FileGroup1=Default Group
+Group=Default Group
+Library1=core
+Library2=httputils2
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~'End of default text.~\n~
+Module1=Starter
+NumberOfFiles=1
+NumberOfLibraries=2
+NumberOfModules=1
+Version=9.801
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: PHP
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: false
+#End Region
+
+Sub Process_Globals
+End Sub
+
+Sub Globals
+	Private List1 As ListView
+	Private btn1 As Button
+	Dim httpJob1 As HttpJob
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("ui1")
+End Sub
+
+Sub Activity_Resume
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+End Sub
+
+Sub Button1_Click
+	If httpJob1.IsInitialized=False Then
+		httpJob1.Initialize("ht1",Me)
+	End If
+			httpJob1.Download("http://www.amch.ir/index3.php")
+					ProgressDialogShow("loading...")
+End Sub
+
+
+Sub jobdone(job As HttpJob)
+	If job.Success=True Then
+		Select job.JobName
+			Case "ht1"
+					Dim ss() As String=Regex.Split("<br>",job.GetString)
+						Dim getData1() As String=Regex.Split("#",ss(0))
+						Dim getData2() As String=Regex.Split("#",ss(1))
+								List1.AddTwoLines(getData1(0),getData1(1))
+								List1.AddTwoLines(getData2(0),getData2(1))
+			ProgressDialogHide
+			
+		End Select
+	End If
+	
+	End Sub
