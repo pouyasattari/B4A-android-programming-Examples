@@ -1,0 +1,182 @@
+Build1=Calculator,mashinhesab.pouya.sattari
+File1=ui1.bal
+FileGroup1=Default Group
+Group=Default Group
+Library1=core
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~'End of default text.~\n~
+Module1=Starter
+NumberOfFiles=1
+NumberOfLibraries=1
+NumberOfModules=1
+Version=9.801
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Calculator
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: false
+	#IncludeTitle: false
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+
+	
+	Private labelView As Label
+	Private button1DidTouch As Button
+	Private button2DidTouch As Button
+	Private button3DidTouch As Button
+	Private button4DidTouch As Button
+	Private button5DidTouch As Button
+	Private button6DidTouch As Button
+	Private button7DidTouch As Button
+	Private button8DidTouch As Button
+	Private button9DidTouch As Button
+	Private buttonJamDidTouch As Button
+	Private button0DidTouch As Button
+	Private buttonDotDidTouch As Button
+	Private buttonMenhaDidTouch As Button
+	Private buttonZarbDidTouch As Button
+	Private buttonTaghsimDidTouch As Button
+	Private buttonMosaviDidTouch As Button
+	Private resetButtonDidTouch As Button
+	
+	Dim str1,str2 As String
+	Dim a,b,s As Float
+	Dim lm As Int
+	Dim i As Int
+	
+	Private backButtonDidTouch As Button
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	'Do not forget to load the layout file created with the visual designer. For example:
+	Activity.LoadLayout("ui1")
+	str1= ""
+End Sub
+
+Sub Activity_Resume
+	
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+
+Sub button1DidTouch_Click
+	str1 = str1 & "1"
+	labelView.Text = str1
+End Sub
+
+Sub button2DidTouch_Click
+	str1 = str1 & "2"
+	labelView.Text = str1
+End Sub
+
+Sub button3DidTouch_Click
+	str1 = str1 & "3"
+	labelView.Text = str1
+End Sub
+
+Sub button4DidTouch_Click
+	str1 = str1 & "4"
+	labelView.Text = str1
+End Sub
+
+Sub button5DidTouch_Click
+	str1 = str1 & "5"
+	labelView.Text = str1
+End Sub
+
+Sub button6DidTouch_Click
+	str1 = str1 & "6"
+	labelView.Text = str1
+End Sub
+
+Sub button7DidTouch_Click
+	str1 = str1 & "7"
+	labelView.Text = str1
+End Sub
+
+Sub button8DidTouch_Click
+	str1 = str1 & "8"
+	labelView.Text = str1
+End Sub
+
+Sub button9DidTouch_Click
+	str1 = str1 & "9"
+	labelView.Text = str1
+End Sub
+
+Sub buttonDotDidTouch_Click
+	str1 = str1 & "."
+	labelView.Text = str1
+End Sub
+
+Sub button0DidTouch_Click
+	str1 = str1 & "0"
+	labelView.Text = str1
+		If labelView.Text = "." Then
+			buttonDotDidTouch.Enabled = False
+		End If
+End Sub
+
+Sub buttonJamDidTouch_Click
+	str2=str1
+	str1= ""
+	lm=1
+End Sub
+
+Sub buttonMenhaDidTouch_Click
+	str2=str1
+	str1= ""
+	lm=2
+End Sub
+
+Sub buttonZarbDidTouch_Click
+	str2=str1
+	str1= ""
+	lm=3
+End Sub
+
+Sub buttonTaghsimDidTouch_Click
+	str2=str1
+	str1= ""
+	lm=4
+End Sub
+
+Sub buttonMosaviDidTouch_Click
+	a=str2
+	b=str1
+	If lm=1 Then
+		s=a+b
+		labelView.Text=s
+	End If
+	If lm=2 Then
+		s=a-b
+		labelView.Text=s
+	End If
+	If lm=3 Then
+		s=a*b
+		labelView.Text=s
+	End If
+	If lm=4 Then
+		s=a/b
+		labelView.Text=s
+	End If
+	
+	End Sub
