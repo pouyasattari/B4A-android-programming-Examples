@@ -18,5 +18,5 @@ This is the android programing projects with B4A at my computer engineering prog
        
 
 
-Complete project of ** University Grade Registeration App** :  <br />   <br />  سیستم ثبت نمرات.zip
+** Complete project of University Grade Registeration App** :  <br />   <br />  سیستم ثبت نمرات.zip
 <br /> <br /> 
