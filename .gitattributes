@@ -1,1 +1,2 @@
-*.b4a linguist-language=True
+*.java linguist-language=Java
+*.xml linguist-language=XML
